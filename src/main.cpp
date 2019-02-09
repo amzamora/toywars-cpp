@@ -1,16 +1,25 @@
 #include "Game.hpp"
 
 Game *game = nullptr;
+const Uint32 MS_PER_FRAME = 1000 / 60;
 
 int main (int argc, const char *argv[]) {
 
 	game = new Game();
 	game->start("Toywars", 100, 100, 500, 200, false);
 
+	Uint32 start, elapsed;
 	while (game->running()) {
+		start = SDL_GetTicks();
+
 		game->handle_events();
 		game->update();
 		game->render();
+
+		elapsed = SDL_GetTicks() - start;
+		if (MS_PER_FRAME > elapsed) {
+			SDL_Delay(MS_PER_FRAME - elapsed);
+		}
 	}
 
 	game->close();
