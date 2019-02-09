@@ -6,7 +6,7 @@ const Uint32 MS_PER_FRAME = 1000 / 60;
 int main (int argc, const char *argv[]) {
 
 	game = new Game();
-	game->start("Toywars", 100, 100, 500, 200, false);
+	game->start("Toywars", 100, 100, 512, 128, false);
 
 	Uint32 start, elapsed;
 	while (game->running()) {

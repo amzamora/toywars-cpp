@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "TextureManager.hpp"
 #include <cstdlib>
 
 Game::Game() {
@@ -41,6 +42,9 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 		exit(EXIT_FAILURE);
 	}
 
+	// Load game texture
+	texture_atlas = TextureManager::load_texture(renderer, "assets/texture_atlas.png");
+
 	is_running = true;
 }
 
@@ -66,6 +70,9 @@ void Game::render() {
 	// Clear display
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(renderer);
+
+	// Draw texture
+	SDL_RenderCopy(renderer, texture_atlas, NULL, NULL);
 
 	//Update screen
 	SDL_RenderPresent(renderer);

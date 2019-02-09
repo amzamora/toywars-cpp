@@ -23,6 +23,7 @@ class Game {
 		bool is_running;
 		SDL_Window *window;
 		SDL_Renderer *renderer;
+		SDL_Texture *texture_atlas;
 };
 
 #endif
