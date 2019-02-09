@@ -32,6 +32,15 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 		exit(EXIT_FAILURE);
 	}
 
+	// Create renderer
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	if(renderer == NULL) {
+		printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+		SDL_DestroyWindow(window);
+		SDL_Quit();
+		exit(EXIT_FAILURE);
+	}
+
 	is_running = true;
 }
 
@@ -54,10 +63,16 @@ void Game::update() {
 }
 
 void Game::render() {
+	// Clear display
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderClear(renderer);
 
+	//Update screen
+	SDL_RenderPresent(renderer);
 }
 
 void Game::close() {
-	 SDL_DestroyWindow(window);
-	 SDL_Quit();
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
 }
