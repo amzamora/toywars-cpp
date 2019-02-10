@@ -3,7 +3,7 @@
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include <cstdio>
+#include "Board.hpp"
 
 class Game {
 	public:
@@ -23,7 +23,7 @@ class Game {
 		bool is_running;
 		SDL_Window *window;
 		SDL_Renderer *renderer;
-		SDL_Texture *texture_atlas;
+		Board *board;
 };
 
 #endif

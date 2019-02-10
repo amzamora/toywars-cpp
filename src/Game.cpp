@@ -42,10 +42,10 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 		exit(EXIT_FAILURE);
 	}
 
-	// Load game texture
-	texture_atlas = TextureManager::load_texture(renderer, "assets/texture_atlas.png");
-
 	is_running = true;
+
+	// Create board
+	board = new Board(renderer);
 }
 
 void Game::handle_events() {
@@ -71,8 +71,8 @@ void Game::render() {
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(renderer);
 
-	// Draw texture
-	SDL_RenderCopy(renderer, texture_atlas, NULL, NULL);
+	// Draw board
+	board->draw(renderer);
 
 	//Update screen
 	SDL_RenderPresent(renderer);
