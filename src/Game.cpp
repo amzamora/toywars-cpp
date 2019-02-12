@@ -1,6 +1,7 @@
 #include "Game.hpp"
-#include "TextureManager.hpp"
 #include <cstdlib>
+
+SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game() {
 
@@ -45,7 +46,7 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 	is_running = true;
 
 	// Create board
-	board = new Board(renderer);
+	board = new Board();
 }
 
 void Game::handle_events() {
@@ -72,7 +73,7 @@ void Game::render() {
 	SDL_RenderClear(renderer);
 
 	// Draw board
-	board->draw(renderer);
+	board->draw();
 
 	//Update screen
 	SDL_RenderPresent(renderer);
