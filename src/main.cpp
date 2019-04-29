@@ -9,7 +9,7 @@ int main (int argc, const char *argv[]) {
 	game->start("Toywars", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 640, false);
 
 	Uint32 start, elapsed;
-	while (game->running()) {
+	while (game->running) {
 		start = SDL_GetTicks();
 
 		game->handle_events();
