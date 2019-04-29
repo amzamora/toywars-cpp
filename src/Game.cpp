@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include <cstdlib>
 
 Game::Game() {
 	running = false;
@@ -14,7 +13,7 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 	window = new Window(title, x, y, width, height, fullscreen);
 
 	// Create board
-	//board = new Board();
+	board = new Board();
 
 	running = true;
 }
@@ -42,7 +41,7 @@ void Game::render() {
 	window->clear();
 
 	// Draw board
-	//board->draw();
+	board->draw(window);
 
 	//Update screen
 	window->update();
