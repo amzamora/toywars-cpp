@@ -1,8 +1,9 @@
 #include "Board.hpp"
+#include "game_objects/Tank.hpp"
 
 Board::Board() {
 	// Load board
-	int board[10][10] = {{1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+	int board[10][10] = {{1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
 			     {2, 2, 0, 0, 0, 0, 0, 0, 0, 0},
 			     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			     {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -18,11 +19,11 @@ Board::Board() {
 }
 
 void Board::load_board(int board[10][10]) {
-	/*for (int row = 0; row < 10; row++) {
+	for (int row = 0; row < 10; row++) {
 		for (int column = 0; column < 10; column++) {
-			switch (board[i][j]) {
+			switch (board[row][column]) {
 				case 1:
-					//game_objects.push_back(GameObject::new_tank(row, column));
+					game_objects.push_back(new Tank(row, column));
 					break;
 				case 2:
 					//game_objects.push_back(GameObject::new_mountain(row, column));
@@ -34,11 +35,11 @@ void Board::load_board(int board[10][10]) {
 					break;
 			}
 		}
-	}*/
+	}
 }
 
 void Board::draw() {
-	/*for (int i = 0; i < game_objects.size(); i++) {
+	for (int i = 0; i < (int) game_objects.size(); i++) {
 		game_objects[i]->draw();
-	}*/
+	}
 }

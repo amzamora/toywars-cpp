@@ -2,23 +2,23 @@
 #define GameObject_hpp
 
 #include <vector>
-
-//#include "game_objects/Tank.hpp"
-//#include "game_objects/Mountain.hpp"
-//#include "game_objects/Lake.hpp"
+#include "SDL2/SDL.h"
 
 class GameObject {
 	public:
-		void update(Board *board);
-		void draw();
+		GameObject(int row, int column, int width, int height, int texture_x, int texture_y);
+		virtual ~GameObject();
+		//void update(Board *board);
+		virtual void draw() {};
 
-		//static Tank *new_tank(int row, int column);
-
-	private:
+	protected:
 		int row;
 		int column;
-		SDL_Texture* texture;
-		std::vector<Component*> components;
+		int width;
+		int height;
+		int texture_x;
+		int texture_y;
+		//std::vector<Component*> components;
 };
 
 #endif

@@ -1,7 +1,9 @@
 #include "Game.hpp"
+#include "TextureManager.hpp"
 #include <cstdlib>
 
 SDL_Renderer *Game::renderer = nullptr;
+SDL_Texture *Game::texture_atlas = nullptr;
 
 Game::Game() {
 
@@ -16,6 +18,7 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 	is_running = false;
 	window = nullptr;
 	renderer = nullptr;
+	texture_atlas = nullptr;
 
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -47,6 +50,9 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 
 	// Create board
 	board = new Board();
+
+	// Load texture
+	texture_atlas = TextureManager::load_texture("assets/texture_atlas.png");
 }
 
 void Game::handle_events() {

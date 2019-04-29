@@ -19,6 +19,7 @@ class Game {
 
 		bool running() { return is_running; }
 
+		static SDL_Texture* texture_atlas;
 		static SDL_Renderer* renderer;
 
 	private:

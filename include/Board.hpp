@@ -4,7 +4,7 @@
 #include "SDL2/SDL.h"
 #include <vector>
 
-//#include "GameObject.hpp"
+#include "GameObject.hpp"
 
 class Board {
 	public:
@@ -12,9 +12,9 @@ class Board {
 		~Board();
 		void load_board(int board[10][10]);
 		void draw();
+		SDL_Texture *texture_atlas;
 
 	private:
-		SDL_Texture *texture_atlas;
-		//std::vector<GameObject*> game_objects;
+		std::vector<GameObject*> game_objects;
 };
 #endif
