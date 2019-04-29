@@ -1,13 +1,20 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
+#include <map>
+#include <string>
+using namespace std;
+
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 
 class Window {
 public:
         // Data
         SDL_Window* window;
 	SDL_Renderer *renderer;
+        map<string, SDL_Texture*> textures;
+
 
         // Methods
         Window(const char *title, int x, int y, int width, int height, bool fullscreen);
@@ -16,6 +23,7 @@ public:
         void clear();
         void update();
         void close();
+        void load_texture(const char *path);
 };
 
 #endif

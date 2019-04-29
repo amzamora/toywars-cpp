@@ -45,3 +45,11 @@ void Window::close() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 }
+
+void Window::load_texture(const char* path) {
+	SDL_Surface *temp_surface = IMG_Load(path);
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, temp_surface);
+	SDL_FreeSurface(temp_surface);
+
+	textures.insert(pair<string, SDL_Texture*>(path, texture));
+}
