@@ -53,3 +53,20 @@ void Window::load_texture(const char* path) {
 
 	textures.insert(pair<string, SDL_Texture*>(path, texture));
 }
+
+void Window::render(const char* texture_path, int cx, int cy, int cw, int ch, int x, int y, int w, int h) {
+	SDL_Rect clip; // Rect to be clipped from texture
+	SDL_Rect dst; // Destination rect
+
+	clip.x = cx;
+	clip.y = cy;
+	clip.w = cw;
+	clip.h = ch;
+
+	dst.x = x;
+	dst.y = y;
+	dst.w = w;
+	dst.h = h;
+
+	SDL_RenderCopy(renderer, textures[texture_path], &clip, &dst);
+}
