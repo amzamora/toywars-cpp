@@ -1,20 +1,20 @@
 #include <iostream>
 
-#include "objects/game_objects/Tank.hpp"
+#include "objects/game_objects/Rocks.hpp"
 
-Tank::Tank(int row, int column) {
+Rocks::Rocks(int row, int column) {
         this->row = row;
         this->column = column;
 }
 
-Tank::~Tank() {
+Rocks::~Rocks() {
 
 }
 
-void Tank::draw(Window *window) {
+void Rocks::draw(Window *window) {
         window->render(texture, cx, cy, tw, th, column * 64, row * 64, 64, 64);
 }
 
-void Tank::update() {
+void Rocks::update() {
 
 }
