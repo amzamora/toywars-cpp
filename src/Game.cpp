@@ -9,8 +9,9 @@ Game::~Game() {
 }
 
 void Game::start(const char *title, int x, int y, int width, int height, bool fullscreen) {
-	// Create window
+	// Create window and viewport
 	window = new Window(title, x, y, width, height, fullscreen);
+	//viewport = new Viewport(0, 0, width, height);
 
 	// Load textures
 	window->load_texture("assets/texture_atlas.png");
