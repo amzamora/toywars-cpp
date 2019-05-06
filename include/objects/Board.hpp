@@ -15,7 +15,6 @@ public:
         // Methods
         Board();
         ~Board();
-        void draw(Window *window);
 };
 
 #endif

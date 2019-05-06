@@ -3,6 +3,7 @@
 
 #include "objects/Window.hpp"
 #include "objects/Board.hpp"
+#include "objects/Viewport.hpp"
 
 class Game {
 public:
@@ -14,7 +15,7 @@ public:
 	// Objects
 	Window *window;
 	Board *board;
-	//Viewport *viewport;
+	Viewport *viewport;
 
 	// Methods
 	Game();

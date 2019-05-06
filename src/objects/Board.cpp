@@ -35,9 +35,3 @@ Board::Board() {
 Board::~Board() {
 
 }
-
-void Board::draw(Window *window) {
-        for (unsigned int i = 0; i < objects.size(); i++) {
-                objects[i]->draw(window);
-        }
-}
