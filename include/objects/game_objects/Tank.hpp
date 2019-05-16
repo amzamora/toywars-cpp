@@ -15,7 +15,7 @@ public:
         // Methods
         Tank(int row, int column);
         ~Tank();
-        void draw(Window *window) override;
+        void draw(Window *window, SDL_Rect dst) override;
         void update() override;
 
 };

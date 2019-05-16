@@ -15,7 +15,7 @@ public:
         // Methods
         Rocks(int row, int column);
         ~Rocks();
-        void draw(Window *window) override;
+        void draw(Window *window, SDL_Rect dst) override;
         void update() override;
 
 };

@@ -2,7 +2,6 @@
 #define VIEWPORT_HPP
 
 #include "objects/Window.hpp"
-#include "objects/Board.hpp"
 
 class Viewport {
 public:
@@ -18,7 +17,8 @@ public:
         // Methods
         Viewport(int x, int y, unsigned int width, unsigned int height);
         ~Viewport();
-        void draw(Window *window, Board *board);
+        bool its_on_screen(SDL_Rect position);
+        SDL_Rect transform(SDL_Rect pos);
 };
 
 #endif

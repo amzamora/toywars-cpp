@@ -11,7 +11,7 @@ public:
 
         // Methods
         virtual ~GameObject() {};
-        virtual void draw(Window *window) = 0;
+        virtual void draw(Window *window, SDL_Rect dst) = 0;
         virtual void update() = 0;
 };
 

@@ -14,8 +14,10 @@ Viewport::~Viewport() {
 
 }
 
-void Viewport::draw(Window *window, Board *board) {
-        for (unsigned int i = 0; i < board->objects.size(); i++) {
-                board->objects[i]->draw(window);
-        }
+bool Viewport::its_on_screen(SDL_Rect position) {
+        return true;
+}
+
+SDL_Rect Viewport::transform(SDL_Rect pos) {
+        return pos;
 }

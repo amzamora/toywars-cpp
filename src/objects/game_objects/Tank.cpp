@@ -11,8 +11,14 @@ Tank::~Tank() {
 
 }
 
-void Tank::draw(Window *window) {
-        window->render(texture, cx, cy, tw, th, column * 64, row * 64, 64, 64);
+void Tank::draw(Window *window, SDL_Rect dst) {
+        SDL_Rect clip;
+        clip.x = cx;
+        clip.y = cy;
+        clip.w = tw;
+        clip.h = th;
+
+        window->render(texture, clip, dst);
 }
 
 void Tank::update() {

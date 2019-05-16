@@ -3,7 +3,9 @@
 #include "objects/game_objects/Water.hpp"
 #include "objects/game_objects/Rocks.hpp"
 
-Board::Board() {
+Board::Board(Viewport *viewport) {
+        this->viewport = viewport;
+
         int board[10][10] = {
                 {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -34,4 +36,22 @@ Board::Board() {
 
 Board::~Board() {
 
+}
+
+void Board::draw(Window *window) {
+        for (unsigned int i = 0; i < objects.size(); i++) {
+                if (viewport->its_on_screen(get_object_position(objects[i]))) {
+                        objects[i]->draw(window, viewport->transform(get_object_position(objects[i])));
+                }
+        }
+}
+
+SDL_Rect Board::get_object_position(GameObject *object) {
+        SDL_Rect pos;
+        pos.x = object->column * tile_size;
+        pos.y = object->row * tile_size;
+        pos.w = tile_size;
+        pos.h = tile_size;
+
+        return pos;
 }

@@ -11,13 +11,12 @@ Game::~Game() {
 void Game::start(const char *title, int x, int y, int width, int height, bool fullscreen) {
 	// Create window and viewport
 	window = new Window(title, x, y, width, height, fullscreen);
-	viewport = new Viewport(0, 0, width, height);
 
 	// Load textures
 	window->load_texture("assets/texture_atlas.png");
 
 	// Create board
-	board = new Board();
+	board = new Board(new Viewport(0, 0, width, height));
 
 	running = true;
 }
@@ -45,7 +44,7 @@ void Game::render() {
 	window->clear();
 
 	// Draw board
-	viewport->draw(window, board);
+	board->draw(window);
 
 	//Update screen
 	window->update();

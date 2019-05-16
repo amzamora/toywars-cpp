@@ -15,7 +15,7 @@ public:
         // Methods
         Water(int row, int column);
         ~Water();
-        void draw(Window *window) override;
+        void draw(Window *window, SDL_Rect dst) override;
         void update() override;
 
 };

@@ -15,7 +15,6 @@ public:
 	// Objects
 	Window *window;
 	Board *board;
-	Viewport *viewport;
 
 	// Methods
 	Game();

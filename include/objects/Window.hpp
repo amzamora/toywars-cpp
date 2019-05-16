@@ -24,7 +24,7 @@ public:
         void update();
         void close();
         void load_texture(const char *path);
-        void render(const char* texture_path, int cx, int cy, int cw, int ch, int x, int y, int w, int h);
+        void render(const char* texture_path, SDL_Rect clip, SDL_Rect dst);
 };
 
 #endif
