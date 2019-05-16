@@ -19,5 +19,8 @@ bool Viewport::its_on_screen(SDL_Rect position) {
 }
 
 SDL_Rect Viewport::transform(SDL_Rect pos) {
+        pos.x -= this->x;
+        pos.y -= this->y;
+
         return pos;
 }

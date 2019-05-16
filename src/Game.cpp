@@ -25,12 +25,27 @@ void Game::handle_events() {
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event) != 0) {
-		switch (event.type) {
-			case SDL_QUIT:
-				running = false;
-				break;
-			default:
-				break;
+		if (event.type == SDL_QUIT) {
+			running = false;
+
+		} else if (event.type == SDL_KEYDOWN){
+			switch (event.key.keysym.sym) {
+				case SDLK_UP:
+					board->viewport->y -= 5;
+					break;
+
+				case SDLK_DOWN:
+					board->viewport->y += 5;
+					break;
+
+				case SDLK_LEFT:
+					board->viewport->x -= 5;
+					break;
+
+				case SDLK_RIGHT:
+					board->viewport->x += 5;
+					break;
+			}
 		}
 	}
 }
