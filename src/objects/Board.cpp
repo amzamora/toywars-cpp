@@ -22,13 +22,15 @@ Board::Board(Viewport *viewport) {
         for (int row = 0; row < 10; row++) {
                 for (int column = 0; column < 10; column++) {
                         if (board[row][column] == 1) {
-                                objects.push_back(new Tank(row, column));
+                                this->board[row][column] = new Tank(row, column);
 
                         } else if (board[row][column] == 2) {
-                                objects.push_back(new Water(row, column));
+                                this->board[row][column] = new Water(row, column);
 
                         } else if (board[row][column] == 3) {
-                                objects.push_back(new Rocks(row, column));
+                                this->board[row][column] = new Rocks(row, column);
+                        } else {
+                                this->board[row][column] = NULL;
                         }
                 }
         }
@@ -39,9 +41,11 @@ Board::~Board() {
 }
 
 void Board::draw(Window *window) {
-        for (unsigned int i = 0; i < objects.size(); i++) {
-                if (viewport->its_on_screen(get_object_position(objects[i]))) {
-                        objects[i]->draw(window, viewport->transform(get_object_position(objects[i])));
+        for (int row = 0; row < 10; row++) {
+                for (int column = 0; column < 10; column++) {
+                        if (board[row][column] != NULL) {
+                                board[row][column]->draw(window, viewport->transform(get_object_position(board[row][column])));
+                        }
                 }
         }
 }

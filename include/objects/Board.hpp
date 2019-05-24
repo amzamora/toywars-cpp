@@ -11,7 +11,7 @@ using namespace std;
 class Board {
 public:
         // Data
-        vector<GameObject*> objects;
+        GameObject* board[10][10];
         Viewport *viewport;
         unsigned int tile_size = 64;
 
