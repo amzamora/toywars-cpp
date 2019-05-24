@@ -19,6 +19,7 @@ Board::Board(Viewport *viewport) {
                 {0, 0, 2, 2, 0, 0, 0, 1, 1, 2}
         };
 
+        // Put objects on board
         for (int row = 0; row < 10; row++) {
                 for (int column = 0; column < 10; column++) {
                         if (board[row][column] == 1) {
@@ -26,6 +27,10 @@ Board::Board(Viewport *viewport) {
 
                         } else if (board[row][column] == 2) {
                                 this->board[row][column] = new Water(row, column);
+
+                                if (row == 0 || board[row - 1][column] != 2) {
+                                        ((Water*) this->board[row][column])->topmost = true;
+                                }
 
                         } else if (board[row][column] == 3) {
                                 this->board[row][column] = new Rocks(row, column);

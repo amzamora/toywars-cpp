@@ -13,10 +13,17 @@ Water::~Water() {
 
 void Water::draw(Window *window, SDL_Rect dst) {
         SDL_Rect clip;
-        clip.x = cx;
-        clip.y = cy;
-        clip.w = tw;
-        clip.h = th;
+        if (topmost) {
+                clip.x = topmost_cx;
+                clip.y = topmost_cy;
+                clip.w = topmost_w;
+                clip.h = topmost_h;
+        } else {
+                clip.x = cx;
+                clip.y = cy;
+                clip.w = tw;
+                clip.h = th;
+        }
 
         window->render(texture, clip, dst);
 }
