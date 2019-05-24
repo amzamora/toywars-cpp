@@ -4,17 +4,17 @@
 #include "objects/Window.hpp"
 #include "objects/Board.hpp"
 #include "objects/Viewport.hpp"
+#include "objects/Input.hpp"
 
 class Game {
 public:
 	// Data
 	bool running;
-	unsigned int rows_amount;
-	unsigned int columns_amount;
 
 	// Objects
 	Window *window;
 	Board *board;
+	Input *input;
 
 	// Methods
 	Game();

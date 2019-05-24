@@ -24,3 +24,21 @@ SDL_Rect Viewport::transform(SDL_Rect pos) {
 
         return pos;
 }
+
+void Viewport::update(Input *input) {
+        if (input->left) {
+                this->x -= 5;
+        }
+
+        if (input->right) {
+                this->x += 5;
+        }
+
+        if (input->up) {
+                this->y -= 5;
+        }
+
+        if (input->down) {
+                this->y += 5;
+        }
+ }

@@ -9,8 +9,9 @@ Game::~Game() {
 }
 
 void Game::start(const char *title, int x, int y, int width, int height, bool fullscreen) {
-	// Create window and viewport
+	// Create window and input
 	window = new Window(title, x, y, width, height, fullscreen);
+	input = new Input();
 
 	// Load textures
 	window->load_texture("assets/texture_atlas.png");
@@ -28,22 +29,41 @@ void Game::handle_events() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 
-		} else if (event.type == SDL_KEYDOWN){
+		} else if (event.type == SDL_KEYDOWN) {
 			switch (event.key.keysym.sym) {
 				case SDLK_UP:
-					board->viewport->y -= 5;
+					input->up = true;
 					break;
 
 				case SDLK_DOWN:
-					board->viewport->y += 5;
+					input->down = true;
 					break;
 
 				case SDLK_LEFT:
-					board->viewport->x -= 5;
+					input->left = true;
 					break;
 
 				case SDLK_RIGHT:
-					board->viewport->x += 5;
+					input->right = true;
+					break;
+			}
+
+		} else if (event.type == SDL_KEYUP) {
+			switch (event.key.keysym.sym) {
+				case SDLK_UP:
+					input->up = false;
+					break;
+
+				case SDLK_DOWN:
+					input->down = false;
+					break;
+
+				case SDLK_LEFT:
+					input->left = false;
+					break;
+
+				case SDLK_RIGHT:
+					input->right = false;
 					break;
 			}
 		}
@@ -51,7 +71,7 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-
+	board->update(input);
 }
 
 void Game::render() {

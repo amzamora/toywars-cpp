@@ -2,6 +2,7 @@
 #define VIEWPORT_HPP
 
 #include "objects/Window.hpp"
+#include "objects/Input.hpp"
 
 class Viewport {
 public:
@@ -19,6 +20,8 @@ public:
         ~Viewport();
         bool its_on_screen(SDL_Rect position);
         SDL_Rect transform(SDL_Rect pos);
+
+        void update(Input *input);
 };
 
 #endif
