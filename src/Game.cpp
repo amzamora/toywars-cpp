@@ -66,7 +66,25 @@ void Game::handle_events() {
 					input->right = false;
 					break;
 			}
+
+		} else if(event.type == SDL_MOUSEWHEEL) {
+			if (event.wheel.direction == SDL_MOUSEWHEEL_FLIPPED) {
+				event.wheel.y *= -1;
+				event.wheel.x *= -1;
+			}
+
+			// Scroll up
+			if(event.wheel.y > 0) {
+				input->zoom_out = event.wheel.y;
+
+			}
+
+			// Scroll down
+			else if(event.wheel.y < 0) {
+				input->zoom_in = -event.wheel.y;
+			}
 		}
+
 	}
 }
 

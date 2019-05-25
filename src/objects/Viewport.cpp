@@ -6,8 +6,8 @@ Viewport::Viewport(int x, int y, unsigned int width, unsigned int height) {
         this->width = width;
         this->height = height;
 
-        this->scale_x = 0;
-        this->scale_y = 0;
+        this->scale_x = 1.0;
+        this->scale_y = 1.0;
 }
 
 Viewport::~Viewport() {
