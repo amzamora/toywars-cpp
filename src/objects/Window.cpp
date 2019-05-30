@@ -1,15 +1,22 @@
 #include "objects/Window.hpp"
 
 Window::Window(const char *title, int x, int y, int width, int height, bool fullscreen) {
-        // Initialize SDL
+	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
 
+	// Request an OpenGL 4.5 context (should be core)
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
+
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
 	// Create window
-	int flags = 0;
-	if (fullscreen) flags = SDL_WINDOW_FULLSCREEN;
+	unsigned int flags = fullscreen ?  SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN : SDL_WINDOW_OPENGL;
 	window = SDL_CreateWindow(title, x, y, width, height, flags);
 
 	if (window == NULL) {
@@ -18,14 +25,20 @@ Window::Window(const char *title, int x, int y, int width, int height, bool full
 		exit(EXIT_FAILURE);
 	}
 
-	// Create renderer
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if(renderer == NULL) {
-		printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+	// Create context
+	context = SDL_GL_CreateContext(window);
+	if(context == NULL) {
+		printf( "Context could not be created! SDL Error: %s\n", SDL_GetError());
 		SDL_DestroyWindow(window);
 		SDL_Quit();
 		exit(EXIT_FAILURE);
 	}
+
+	// Load OpenGL functions
+	gladLoadGLLoader(SDL_GL_GetProcAddress);
+
+	// V-Sync
+	SDL_GL_SetSwapInterval(1);
 }
 
 Window::~Window() {
@@ -33,27 +46,28 @@ Window::~Window() {
 }
 
 void Window::clear() {
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderClear(renderer);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Window::update() {
-	SDL_RenderPresent(renderer);
+	SDL_GL_SwapWindow(window);
 }
 
 void Window::close() {
-	SDL_DestroyRenderer(renderer);
+	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
+	SDL_Quit();
 }
 
 void Window::load_texture(const char* path) {
-	SDL_Surface *temp_surface = IMG_Load(path);
+	/*SDL_Surface *temp_surface = IMG_Load(path);
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, temp_surface);
 	SDL_FreeSurface(temp_surface);
 
-	textures.insert(pair<string, SDL_Texture*>(path, texture));
+	textures.insert(pair<string, SDL_Texture*>(path, texture));*/
 }
 
 void Window::render(const char* texture_path, SDL_Rect clip, SDL_Rect dst) {
-	SDL_RenderCopy(renderer, textures[texture_path], &clip, &dst);
+	//SDL_RenderCopy(renderer, textures[texture_path], &clip, &dst);
 }

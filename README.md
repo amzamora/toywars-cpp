@@ -6,11 +6,12 @@
 For building, in the root folder of the project run:
 ```
 meson builddir
+cp -r  assets builddir/assets
 cd builddir
 ninja
 ```
 
-Then move the assets folder to builddir and to execute the game run in it:
+And to run execute:
 ```
 ./toywars
 ```

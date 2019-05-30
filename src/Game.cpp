@@ -105,5 +105,4 @@ void Game::render() {
 
 void Game::close() {
 	window->close();
-	SDL_Quit();
 }

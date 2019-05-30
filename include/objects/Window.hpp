@@ -7,12 +7,13 @@ using namespace std;
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include <glad/glad.h>
 
 class Window {
 public:
         // Data
         SDL_Window* window;
-	SDL_Renderer *renderer;
+	SDL_GLContext context;
         map<string, SDL_Texture*> textures;
 
 
