@@ -2,7 +2,7 @@ project('toywars', 'cpp', 'c', default_options : ['cpp_std=c++14'])
 
 cc = meson.get_compiler('c')
 libdl = cc.find_library('dl', required : false)
-dependencies = [dependency('sdl2'), dependency('SDL2_image'), dependency('GL'),
+dependencies = [dependency('sdl2'), dependency('GL'), dependency('glm'),
                 dependency('x11'), dependency('threads'), dependency('xrandr'),
                 dependency('xi'), libdl]
 

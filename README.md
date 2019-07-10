@@ -6,7 +6,8 @@
 For building, in the root folder of the project run:
 ```
 meson builddir
-cp -r  assets builddir/assets
+cp -r assets builddir/assets
+cp -r src/shaders builddir/shaders 
 cd builddir
 ninja
 ```
