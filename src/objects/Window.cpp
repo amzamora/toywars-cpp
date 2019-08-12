@@ -2,57 +2,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-/* Useful functions
-   =================== */
-string get_text(string path) {
-	string res, str = "";
-
-	ifstream in;
-	in.open (path.c_str());
-	if (in.is_open()) {
-		getline (in, str);
-		while (in) {
-			res += str + "\n";
-			getline (in, str);
-		}
-		return res;
-	} else {
-		cerr << "Unable to open file \"" << path << "\"\n";
-		throw 2;
-	}
-}
-
-static unsigned int load_shader(string path) {
-	string source = get_text(path);
-
-	// Get type of shader
-	unsigned int shader;
-	if (path.substr(path.find_last_of (".") + 1) == "vert") {
-		shader = glCreateShader(GL_VERTEX_SHADER);
-
-	} else {
-		shader = glCreateShader(GL_FRAGMENT_SHADER);
-	}
-
-	// Compile shader
-	const char *source_as_c_str = source.c_str();
-	glShaderSource(shader, 1, &source_as_c_str, NULL);
-	glCompileShader(shader);
-
-	// Check if was compiled correctly
-	int  success;
-	char infoLog[512];
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-
-	if(!success) {
-		glGetShaderInfoLog(shader, 512, NULL, infoLog);
-		cout <<  "Shader in \"" << path << "\" could not be compilated :(\n";
-	}
-
-	return shader;
-}
-
-
 /* Window
    ====== */
 
@@ -160,12 +109,6 @@ Window::~Window() {
 void Window::clear() {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glUseProgram(shader_program);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textures["assets/texture_atlas.png"]);
-	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
 void Window::update() {
@@ -178,33 +121,6 @@ void Window::close() {
 	SDL_Quit();
 }
 
-void Window::load_texture(const char* path) {
-	unsigned int texture;
-
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	// Set texture parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	// Load image
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 0);
-	if (data) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	} else {
-		cout << "Failed to load texture :(\n";
-	}
-	stbi_image_free(data);
-
-	textures.insert(pair<string, unsigned int>(path, texture));
-}
-
 void Window::render(const char* texture_path, SDL_Rect clip, SDL_Rect dst) {
-	//SDL_RenderCopy(renderer, textures[texture_path], &clip, &dst);
+	
 }
