@@ -2,7 +2,6 @@
     "rows" : 1,
     "columns": 4,
 
-
     "animations": {
         "tank_idle": [
             {"tile_x": 4, "tile_y": 1, "duration": 100}

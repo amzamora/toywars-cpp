@@ -1,11 +1,11 @@
-#include "objects/Window.hpp"
+#include "objects/Graphics.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 #include <deps/stb_image.h>
 
 /* Window
    ====== */
 
-Window::Window(const char *title, int x, int y, int width, int height, bool fullscreen) {
+void Graphics::new_window(const char *title, int x, int y, int width, int height, bool fullscreen) {
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -71,5 +71,5 @@ void Window::render(const char* texture_path, SDL_Rect clip, SDL_Rect dst) {
 }
 
 void Window::load_texture(const char *path) {
-	
+
 }

@@ -1,12 +1,6 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include <map>
-#include <string>
-#include <iostream>
-#include <fstream>
-using namespace std;
-
 #include "SDL2/SDL.h"
 #include <deps/glad/glad.h>
 #include <glm/glm.hpp>
@@ -16,23 +10,16 @@ using namespace std;
 class Window {
 public:
 	// Data
-	SDL_Window* window;
-	SDL_GLContext context;
-	map<string, unsigned int> textures;
-	int shader_program;
-	unsigned int VAO;
-	unsigned int vert_buffer;
-
 
 	// Methods
 	Window(const char *title, int x, int y, int width, int height, bool fullscreen);
-	~Window();
+	~Window() {};
 
-	void clear();
+	void draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst);
 	void update();
-	void close();
+	void clear();
+
 	void load_texture(const char *path);
-	void render(const char* texture_path, SDL_Rect clip, SDL_Rect dst);
 };
 
 #endif
