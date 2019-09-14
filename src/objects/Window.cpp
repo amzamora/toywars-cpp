@@ -1,11 +1,11 @@
-#include "objects/Graphics.hpp"
+#include "objects/Window.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 #include <deps/stb_image.h>
 
 /* Window
    ====== */
 
-void Graphics::new_window(const char *title, int x, int y, int width, int height, bool fullscreen) {
+Window::Window(const char *title, int x, int y, int width, int height, bool fullscreen) {
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -46,11 +46,6 @@ void Graphics::new_window(const char *title, int x, int y, int width, int height
 	SDL_GL_SetSwapInterval(1);
 }
 
-Window::~Window() {
-
-}
-
-
 void Window::clear() {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -66,7 +61,7 @@ void Window::close() {
 	SDL_Quit();
 }
 
-void Window::render(const char* texture_path, SDL_Rect clip, SDL_Rect dst) {
+void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst) {
 
 }
 

@@ -1,19 +1,19 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
 
-class SpriteComponent {
-	
-};
+#include "objects/Window.hpp"
 
 class GameObject {
-	// Data
-	int row;
-	int column;
+public:
+        // Data
+        unsigned int row;
+        unsigned int column;
 
-	// Components
-	SpriteComponent sprites;
-
-	// Methods
+        // Methods
+        virtual ~GameObject() {};
+        virtual void draw(Window *window, SDL_Rect dst) = 0;
+        virtual void update() = 0;
 };
+
 
 #endif
