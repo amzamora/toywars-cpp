@@ -7,14 +7,14 @@
         "tank_idle": [
             {"tile_x": 4, "tile_y": 1, "duration": 100}
         ],
-        "water_middle": [
-            {"tile_x": 4, "tile_y": 1, "duration": 100}
+        "water": [
+            {"tile_x": 2, "tile_y": 1, "duration": 100}
         ],
         "water_top": [
-            {"tile_x": 4, "tile_y": 1, "duration": 100}
+            {"tile_x": 3, "tile_y": 1, "duration": 100}
         ],
         "mountain": [
-            {"tile_x": 4, "tile_y": 1, "duration": 100}
+            {"tile_x": 1, "tile_y": 1, "duration": 100}
         ]
     }
 }
