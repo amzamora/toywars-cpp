@@ -11,6 +11,12 @@ using namespace std;
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+struct Texture {
+	unsigned int id;
+	float width;
+	float height;
+};
+
 class Window {
 public:
 	// Data
@@ -20,9 +26,8 @@ public:
 	SDL_Window* window;
 	SDL_GLContext context;
 
-	unsigned int VAO = 0;
 	unsigned int shader_program;
-	map<string, unsigned int> textures;
+	map<string, struct Texture> textures;
 
 	// Methods
 	Window(const char *title, int x, int y, int width, int height, bool fullscreen);

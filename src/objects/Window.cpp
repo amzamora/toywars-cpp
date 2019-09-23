@@ -99,50 +99,6 @@ Window::Window(const char *title, int x, int y, int width, int height, bool full
 
 	glDeleteShader(vs);
 	glDeleteShader(fs);
-
-
-	// Put square of gpu memory
-	// ------------------------
-	int tilex = 3;
-	int tiley = 0;
-	float columns = 4.0f;
-	float rows = 1.0f;
-
-	float vertices[] = {
-	     // Positions  // Tex Coords
-	     100, -100,    (1.0f / columns) * (tilex + 1), (1.0f / rows) * tiley,       // Bottom right
-	     100,    0,    (1.0f / columns) * (tilex + 1), (1.0f / rows) * (tiley + 1), // Top right
-	     0,      0,    (1.0f / columns) * tilex,       (1.0f / rows) * (tiley + 1), // Top left
-	     0,   -100,    (1.0f / columns) * tilex,       (1.0f / rows) * tiley        // Bottom left
-	};
-
-	unsigned int indices[] = {
-	    0, 1, 3,   // First triangle
-	    1, 2, 3    // Second triangle
-	};
-
-	// Create vertex array object to remember next configuration to draw
-	glGenVertexArrays(1, &this->VAO);
-	glBindVertexArray(this->VAO);
-
-	// Put vertices on GPU
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	// Specify layout of vertices
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*) 0);
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-	// Put indices in GPU
-	unsigned int EBO;
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 }
 
 void Window::clear() {
@@ -168,12 +124,47 @@ void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float r
 		load_texture(texture_path);
 	}
 
+	struct Texture t = this->textures[texture_path];
+
 	// Draw stuff
 	// ----------
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	unsigned int VAO;
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
 
-	glBindVertexArray(this->VAO);
+	float vertices[] = {
+	     // Positions  // Tex Coords
+	     100,  100,    (clip.x + clip.w) / t.width, (clip.y + clip.h) / t.height, // Bottom right
+	     100,    0,    (clip.x + clip.w) / t.width,  clip.y / t.height,           // Top right
+	     0,      0,    clip.x / t.width,             clip.y / t.height,           // Top left
+	     0,    100,    clip.x / t.width,            (clip.y + clip.h) / t.height  // Bottom left
+	};
+
+	unsigned int indices[] = {
+	    0, 1, 3,   // First triangle
+	    1, 2, 3    // Second triangle
+	};
+
+	// Put vertices on GPU
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	// Specify layout of vertices
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*) 0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	// Put indices in GPU
+	unsigned int EBO;
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	glBindVertexArray(VAO);
 	glUseProgram(this->shader_program);
 
 	// Model matrix
@@ -188,6 +179,10 @@ void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float r
 
 	unsigned int transform_loc = glGetUniformLocation(shader_program, "transform");
 	glUniformMatrix4fv(transform_loc, 1, GL_FALSE, glm::value_ptr(trans));
+
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
@@ -208,7 +203,12 @@ void Window::load_texture(const char *path) {
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-	textures.insert(pair<string, unsigned int>(path, texture));
+	struct Texture t;
+	t.id = texture;
+	t.width = width;
+	t.height = height;
+
+	textures.insert(pair<string, struct Texture>(path, t));
 
 	// Free stuff
 	stbi_image_free(data);
