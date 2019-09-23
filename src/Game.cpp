@@ -13,9 +13,6 @@ void Game::start(const char *title, int x, int y, int width, int height, bool fu
 	window = new Window(title, x, y, width, height, fullscreen);
 	input = new Input();
 
-	// Load textures
-	window->load_texture("assets/texture_atlas.png");
-
 	// Create board
 	board = new Board(new Viewport(0, 0, width, height));
 

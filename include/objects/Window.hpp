@@ -14,15 +14,21 @@ using namespace std;
 class Window {
 public:
 	// Data
+	float width;
+	float height;
+
 	SDL_Window* window;
 	SDL_GLContext context;
-	map<string, SDL_Texture*> textures;
+
+	unsigned int VAO = 0;
+	unsigned int shader_program;
+	map<string, unsigned int> textures;
 
 	// Methods
 	Window(const char *title, int x, int y, int width, int height, bool fullscreen);
 	~Window() {};
 
-	void draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst);
+	void draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float rotation = 0);
 	void update();
 	void clear();
 	void close();
