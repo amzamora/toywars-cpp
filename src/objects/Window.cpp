@@ -160,7 +160,6 @@ void Window::close() {
 	SDL_Quit();
 }
 
-#include <cstdio>
 void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float rotation) {
 	// If not loaded
 	// -------------
