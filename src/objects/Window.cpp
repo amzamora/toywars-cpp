@@ -178,35 +178,32 @@ void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float r
 
 	struct Texture t = this->textures[texture_path];
 
-	// Draw stuff
-	// ----------
-
 	// Add geometry
 	// ------------
 
 	// Top right
 	this->vertices.push_back(dst.x + dst.w);
 	this->vertices.push_back(dst.y);
-	this->vertices.push_back(1.0);
-	this->vertices.push_back(0.0);
+	this->vertices.push_back(clip.x / t.width + clip.w / t.width);
+	this->vertices.push_back(clip.y / t.height);
 
 	// Bottom right
 	this->vertices.push_back(dst.x + dst.w);
 	this->vertices.push_back(dst.y + dst.h);
-	this->vertices.push_back(1.0);
-	this->vertices.push_back(1.0);
+	this->vertices.push_back(clip.x / t.width + clip.w / t.width);
+	this->vertices.push_back(clip.y / t.height + clip.h / t.height);
 
 	// Bottom left
 	this->vertices.push_back(dst.x);
 	this->vertices.push_back(dst.y + dst.h);
-	this->vertices.push_back(0.75);
-	this->vertices.push_back(1.0);
+	this->vertices.push_back(clip.x / t.width);
+	this->vertices.push_back(clip.y / t.height + clip.h / t.height);
 
 	// Top left
 	this->vertices.push_back(dst.x);
 	this->vertices.push_back(dst.y);
-	this->vertices.push_back(0.75);
-	this->vertices.push_back(0.0);
+	this->vertices.push_back(clip.x / t.width);
+	this->vertices.push_back(clip.y / t.height);
 
 	// Add indices
 	// -----------
