@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 using namespace std;
 
 #include "SDL2/SDL.h"
@@ -27,6 +28,8 @@ public:
 	SDL_GLContext context;
 
 	unsigned int shader_program;
+	vector<float> vertices;
+	vector<unsigned int> indices;
 	map<string, struct Texture> textures;
 
 	// Methods
