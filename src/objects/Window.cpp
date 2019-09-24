@@ -99,6 +99,11 @@ Window::Window(const char *title, int x, int y, int width, int height, bool full
 
 	glDeleteShader(vs);
 	glDeleteShader(fs);
+
+
+	// GL Settings
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Window::clear() {
@@ -180,9 +185,6 @@ void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float r
 	unsigned int transform_loc = glGetUniformLocation(shader_program, "transform");
 	glUniformMatrix4fv(transform_loc, 1, GL_FALSE, glm::value_ptr(trans));
 
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
