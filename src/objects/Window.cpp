@@ -144,7 +144,6 @@ void Window::update() {
 	model = glm::translate(model, glm::vec3(0.0f, -this->height, 0.0f));
 
 	if (this->viewport != nullptr) {
-		printf("%d %d\n", this->viewport->x, this->viewport->y);
 		model = glm::translate(model, glm::vec3(-this->viewport->x, -this->viewport->y, 0.0f));
 	}
 

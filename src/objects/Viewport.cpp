@@ -18,13 +18,6 @@ bool Viewport::its_on_screen(SDL_Rect position) {
 	return true;
 }
 
-/*SDL_Rect Viewport::transform(SDL_Rect pos) {
-	pos.x -= this->x;
-	pos.y -= this->y;
-
-	return pos;
-}*/
-
 void Viewport::update(Input *input) {
 	if (input->left) {
 		this->x -= 5;
