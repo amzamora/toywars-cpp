@@ -6,8 +6,7 @@ Viewport::Viewport(int x, int y, unsigned int width, unsigned int height) {
 	this->width = width;
 	this->height = height;
 
-	this->scale_x = 1.0;
-	this->scale_y = 1.0;
+	this->scale = 1.0;
 }
 
 Viewport::~Viewport() {
@@ -33,5 +32,9 @@ void Viewport::update(Input *input) {
 
 	if (input->down) {
 		this->y += 5;
+	}
+
+	if (input->scroll) {
+		scale += 0.01 * input->scroll;
 	}
  }

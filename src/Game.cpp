@@ -70,15 +70,10 @@ void Game::handle_events() {
 				event.wheel.x *= -1;
 			}
 
-			// Scroll up
-			if(event.wheel.y > 0) {
-				input->zoom_out = event.wheel.y;
+			// Scroll
+			if(event.wheel.y != 0) {
+				input->scroll += event.wheel.y;
 
-			}
-
-			// Scroll down
-			else if(event.wheel.y < 0) {
-				input->zoom_in = -event.wheel.y;
 			}
 		}
 
@@ -87,6 +82,7 @@ void Game::handle_events() {
 
 void Game::update() {
 	board->update(input);
+	input->scroll = 0;
 }
 
 void Game::render() {

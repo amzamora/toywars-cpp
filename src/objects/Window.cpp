@@ -145,6 +145,7 @@ void Window::update() {
 
 	if (this->viewport != nullptr) {
 		model = glm::translate(model, glm::vec3(-this->viewport->x, -this->viewport->y, 0.0f));
+		model = glm::scale(model, glm::vec3(this->viewport->scale, this->viewport->scale, 1.0f));
 	}
 
 	// Projection matrix
