@@ -158,8 +158,11 @@ void Window::update() {
 
 	SDL_GL_SwapWindow(window);
 
+	// Delete stuff
 	this->vertices.clear();
 	this->indices.clear();
+	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, &VAO);
 }
 
 void Window::close() {
