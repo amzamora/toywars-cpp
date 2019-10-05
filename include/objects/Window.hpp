@@ -6,6 +6,8 @@
 #include <vector>
 using namespace std;
 
+#include "Viewport.hpp"
+
 #include "SDL2/SDL.h"
 #include <deps/glad/glad.h>
 #include <glm/glm.hpp>
@@ -31,6 +33,8 @@ public:
 	vector<float> vertices;
 	vector<unsigned int> indices;
 	map<string, struct Texture> textures;
+
+	Viewport *viewport = nullptr;
 
 	// Methods
 	Window(const char *title, int x, int y, int width, int height, bool fullscreen);

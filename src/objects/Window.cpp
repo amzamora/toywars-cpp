@@ -141,7 +141,12 @@ void Window::update() {
 	// Model matrix
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::scale(model, glm::vec3(1.0f, -1.0f, 1.0f));
-	model = glm::translate(model, glm::vec3(0.0, -this->height, 0.0f));
+	model = glm::translate(model, glm::vec3(0.0f, -this->height, 0.0f));
+
+	if (this->viewport != nullptr) {
+		printf("%d %d\n", this->viewport->x, this->viewport->y);
+		model = glm::translate(model, glm::vec3(-this->viewport->x, -this->viewport->y, 0.0f));
+	}
 
 	// Projection matrix
 	glm::mat4 proj = glm::mat4(1.0f);

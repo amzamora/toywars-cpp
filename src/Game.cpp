@@ -97,7 +97,9 @@ void Game::render() {
 	board->draw(window);
 
 	//Update screen
+	window->viewport = board->viewport;
 	window->update();
+	window->viewport = nullptr;
 }
 
 void Game::close() {
