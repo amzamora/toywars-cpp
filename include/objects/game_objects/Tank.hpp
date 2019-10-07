@@ -6,11 +6,11 @@
 class Tank : public GameObject {
 public:
         // Data
-        const char* texture = "assets/texture_atlas.png";
-        const int cx = 384;  // X coordinate where to clip the texture
+        const char* texture = "assets/atlas.png";
+        const int cx = 96;  // X coordinate where to clip the texture
         const int cy = 0;    // Y coordinate where to clip the texture
-        const int tw = 128;  // Texture width
-        const int th = 128;  // Texture height
+        const int tw = 32;  // Texture width
+        const int th = 32;  // Texture height
 
         // Methods
         Tank(int row, int column);
