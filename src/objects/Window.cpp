@@ -145,11 +145,14 @@ void Window::update() {
 
 	if (this->viewport != nullptr) {
 		model = glm::translate(model, glm::vec3(-this->viewport->x, -this->viewport->y, 0.0f));
-		model = glm::scale(model, glm::vec3(this->viewport->scale, this->viewport->scale, 1.0f));
 
-		//float dif_w = this->width - this->width * this->viewport->scale;
-		//float diff_h = this->height - this->height * this->viewport->scale;
-		//model = glm::translate(model, glm::vec3(0.0f, diff_h / 2.0f, 0.0f));
+		float nw = this->width * this->viewport->scale;
+		float nh = this->height * this->viewport->scale;
+		float diff_w = this->width - nw;
+		float diff_h = this->height - nh;
+
+		model = glm::translate(model, glm::vec3(diff_w / 2.0f, diff_h / 2.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(this->viewport->scale, this->viewport->scale, 1.0f));
 	}
 
 	// Projection matrix
