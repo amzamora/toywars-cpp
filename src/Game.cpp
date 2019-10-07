@@ -75,6 +75,9 @@ void Game::handle_events() {
 				input->scroll += event.wheel.y;
 
 			}
+
+		} else if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP )  {
+			SDL_GetMouseState(&(input->mouse_x), &(input->mouse_y));
 		}
 
 	}
