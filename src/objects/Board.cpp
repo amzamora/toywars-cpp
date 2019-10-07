@@ -37,7 +37,7 @@ Board::Board(Viewport *viewport) {
 			} else if (board[row][column] == 3) {
 				this->board[row][column] = new Rocks(row, column);
 			} else {
-				this->board[row][column] = NULL;
+				this->board[row][column] = nullptr;
 			}
 		}
 	}
@@ -49,9 +49,31 @@ Board::~Board() {
 
 void Board::update(Input *input) {
 	viewport->update(input);
+
+	// Determine corresponding tile to mouse
+	mouse_tile_x = (input->mouse_x + this->viewport->x) / (this->tile_size);
+	mouse_tile_y = (input->mouse_y + this->viewport->y) / (this->tile_size);
 }
 
 void Board::draw(Window *window) {
+	// Draw selection
+	//if (board[this->mouse_tile_y][this->mouse_tile_x] != nullptr && ((Tank*)board[this->mouse_tile_y][this->mouse_tile_x])->cx == 96) {
+		SDL_Rect clip;
+		clip.x = 128;
+		clip.y = 0;
+		clip.w = 32;
+		clip.h = 32;
+
+		SDL_Rect dst;
+		dst.x = this->mouse_tile_x * tile_size;
+		dst.y = this->mouse_tile_y * tile_size;
+		dst.w = tile_size;
+		dst.h = tile_size;
+
+		window->draw("assets/atlas.png", clip, dst);
+	//}
+
+	// Draw objects
 	for (int row = 0; row < 10; row++) {
 		for (int column = 0; column < 10; column++) {
 			if (board[row][column] != NULL) {

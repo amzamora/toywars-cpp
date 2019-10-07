@@ -16,6 +16,9 @@ public:
         Viewport *viewport;
         unsigned int tile_size = 64;
 
+        int mouse_tile_x = -1;
+        int mouse_tile_y = -1;
+
         // Methods
         Board(Viewport *viewport);
         ~Board();
