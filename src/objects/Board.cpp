@@ -58,21 +58,23 @@ void Board::update(Input *input) {
 
 void Board::draw(Window *window) {
 	// Draw selection
-	//if (board[this->mouse_tile_y][this->mouse_tile_x] != nullptr && ((Tank*)board[this->mouse_tile_y][this->mouse_tile_x])->cx == 96) {
-		SDL_Rect clip;
-		clip.x = 128;
-		clip.y = 0;
-		clip.w = 32;
-		clip.h = 32;
+	if (board[this->mouse_tile_y][this->mouse_tile_x] != nullptr) {
+		if (board[this->mouse_tile_y][this->mouse_tile_x]->type != TANK) {
+			SDL_Rect clip;
+			clip.x = 128;
+			clip.y = 0;
+			clip.w = 32;
+			clip.h = 32;
 
-		SDL_Rect dst;
-		dst.x = this->mouse_tile_x * tile_size;
-		dst.y = this->mouse_tile_y * tile_size;
-		dst.w = tile_size;
-		dst.h = tile_size;
+			SDL_Rect dst;
+			dst.x = this->mouse_tile_x * tile_size;
+			dst.y = this->mouse_tile_y * tile_size;
+			dst.w = tile_size;
+			dst.h = tile_size;
 
-		window->draw("assets/atlas.png", clip, dst);
-	//}
+			window->draw("assets/atlas.png", clip, dst);
+		}
+	}
 
 	// Draw objects
 	for (int row = 0; row < 10; row++) {

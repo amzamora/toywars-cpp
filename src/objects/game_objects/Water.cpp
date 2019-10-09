@@ -3,6 +3,7 @@
 #include "objects/game_objects/Water.hpp"
 
 Water::Water(int row, int column) {
+	this->type = WATER;
         this->row = row;
         this->column = column;
 }

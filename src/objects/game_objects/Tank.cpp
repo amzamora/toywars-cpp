@@ -3,6 +3,7 @@
 #include "objects/game_objects/Tank.hpp"
 
 Tank::Tank(int row, int column) {
+	this->type = TANK;
         this->row = row;
         this->column = column;
 }
