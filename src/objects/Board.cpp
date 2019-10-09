@@ -36,6 +36,7 @@ Board::Board(Viewport *viewport) {
 
 			} else if (board[row][column] == 3) {
 				this->board[row][column] = new Rocks(row, column);
+
 			} else {
 				this->board[row][column] = nullptr;
 			}

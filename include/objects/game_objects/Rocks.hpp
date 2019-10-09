@@ -5,18 +5,18 @@
 
 class Rocks : public GameObject {
 public:
-        // Data
-        const char* texture = "assets/atlas.png";
-        const int cx = 0;  // X coordinate where to clip the texture
-        const int cy = 0;    // Y coordinate where to clip the texture
-        const int tw = 32;  // Texture width
-        const int th = 32;  // Texture height
+	// Data
+	const char* texture = "assets/atlas.png";
+	const int cx = 0;  // X coordinate where to clip the texture
+	const int cy = 0;    // Y coordinate where to clip the texture
+	const int tw = 32;  // Texture width
+	const int th = 32;  // Texture height
 
-        // Methods
-        Rocks(int row, int column);
-        ~Rocks();
-        void draw(Window *window, SDL_Rect dst) override;
-        void update() override;
+	// Methods
+	Rocks(int row, int column);
+	~Rocks();
+	void draw(Window *window, SDL_Rect dst) override;
+	void update() override;
 
 };
 
