@@ -78,8 +78,20 @@ void Game::handle_events() {
 
 		} else if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP )  {
 			SDL_GetMouseState(&(input->mouse_x), &(input->mouse_y));
-		}
 
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					input->left_button_down = true;
+				}
+			}
+
+			if (event.type == SDL_MOUSEBUTTONUP) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					input->left_button_down = false;
+				}
+			}
+
+		}
 	}
 }
 
