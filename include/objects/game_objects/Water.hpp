@@ -20,7 +20,7 @@ public:
 	bool topmost = false;
 
 	// Methods
-	Water(int row, int column);
+	Water();
 	~Water();
 	void draw(Window *window, SDL_Rect dst) override;
 	void update() override;

@@ -25,17 +25,17 @@ Board::Board(Viewport *viewport) {
 	for (int row = 0; row < 10; row++) {
 		for (int column = 0; column < 10; column++) {
 			if (board[row][column] == 1) {
-				this->board[row][column] = new Tank(row, column);
+				this->board[row][column] = new Tank();
 
 			} else if (board[row][column] == 2) {
-				this->board[row][column] = new Water(row, column);
+				this->board[row][column] = new Water();
 
 				if (row == 0 || board[row - 1][column] != 2) {
 					((Water*) this->board[row][column])->topmost = true;
 				}
 
 			} else if (board[row][column] == 3) {
-				this->board[row][column] = new Rocks(row, column);
+				this->board[row][column] = new Rocks();
 
 			} else {
 				this->board[row][column] = nullptr;
@@ -60,7 +60,7 @@ void Board::update(Input *input) {
 	mouse_tile_x = (input->mouse_x + this->viewport->x - diff_w / 2) / (this->tile_size * this->viewport->scale);
 	mouse_tile_y = (input->mouse_y + this->viewport->y - diff_h / 2) / (this->tile_size * this->viewport->scale);
 
-	if (input->left_button_down && this->board[mouse_tile_y][mouse_tile_x] != nullptr) {
+	if (input->left_button_down && this->board[mouse_tile_y][mouse_tile_x] != nullptr && this->dragged_unit == nullptr) {
 		if (this->board[mouse_tile_y][mouse_tile_x]->type == TANK) {
 			this->dragged_unit = this->board[mouse_tile_y][mouse_tile_x];
 		}
@@ -70,8 +70,24 @@ void Board::update(Input *input) {
 		if (!input->left_button_down) {
 			this->dragged_unit = nullptr;
 		} else {
-			this->dragged_unit->row = mouse_tile_y;
-			this->dragged_unit->column = mouse_tile_x;
+			if (this->board[mouse_tile_y][mouse_tile_x] != this->dragged_unit) {
+				if (this->board[mouse_tile_y][mouse_tile_x] == nullptr) {
+					// Find element a removed it in board
+					for (int row = 0; row < 10; row++) {
+						for (int column = 0; column < 10; column++) {
+							if (board[row][column] == dragged_unit) {
+								this->board[row][column] = nullptr;
+							}
+						}
+					}
+
+					// Put element in new location
+					this->board[mouse_tile_y][mouse_tile_x] = this->dragged_unit;
+
+				} else {
+					this->dragged_unit = nullptr;
+				}
+			}
 		}
 	}
 }
@@ -100,16 +116,16 @@ void Board::draw(Window *window) {
 	for (int row = 0; row < 10; row++) {
 		for (int column = 0; column < 10; column++) {
 			if (board[row][column] != NULL) {
-				board[row][column]->draw(window, get_object_position(board[row][column]));
+				board[row][column]->draw(window, get_object_position(row, column));
 			}
 		}
 	}
 }
 
-SDL_Rect Board::get_object_position(GameObject *object) {
+SDL_Rect Board::get_object_position(int row, int column) {
 	SDL_Rect pos;
-	pos.x = object->column * tile_size;
-	pos.y = object->row * tile_size;
+	pos.x = column * tile_size;
+	pos.y = row * tile_size;
 	pos.w = tile_size;
 	pos.h = tile_size;
 

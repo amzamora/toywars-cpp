@@ -2,10 +2,8 @@
 
 #include "objects/game_objects/Tank.hpp"
 
-Tank::Tank(int row, int column) {
+Tank::Tank() {
 	this->type = TANK;
-	this->row = row;
-	this->column = column;
 }
 
 Tank::~Tank() {

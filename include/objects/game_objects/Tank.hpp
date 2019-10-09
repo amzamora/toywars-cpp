@@ -13,7 +13,7 @@ public:
 	const int th = 32;  // Texture height
 
 	// Methods
-	Tank(int row, int column);
+	Tank();
 	~Tank();
 	void draw(Window *window, SDL_Rect dst) override;
 	void update() override;

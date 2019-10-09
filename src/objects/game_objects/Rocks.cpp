@@ -2,10 +2,8 @@
 
 #include "objects/game_objects/Rocks.hpp"
 
-Rocks::Rocks(int row, int column) {
+Rocks::Rocks() {
 	this->type = ROCKS;
-	this->row = row;
-	this->column = column;
 }
 
 Rocks::~Rocks() {

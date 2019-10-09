@@ -12,8 +12,6 @@ enum GameObjectType {
 class GameObject {
 public:
 	// Data
-	unsigned int row;
-	unsigned int column;
 	enum GameObjectType type;
 
 	// Methods

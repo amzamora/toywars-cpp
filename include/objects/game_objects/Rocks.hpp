@@ -13,7 +13,7 @@ public:
 	const int th = 32;  // Texture height
 
 	// Methods
-	Rocks(int row, int column);
+	Rocks();
 	~Rocks();
 	void draw(Window *window, SDL_Rect dst) override;
 	void update() override;

@@ -28,7 +28,7 @@ public:
 	void update(Input *input);
 
 	void draw(Window *window);
-	SDL_Rect get_object_position(GameObject *object);
+	SDL_Rect get_object_position(int row, int column);
 };
 
 #endif
