@@ -52,14 +52,19 @@ void Board::update(Input *input) {
 	viewport->update(input);
 
 	// Determine corresponding tile to mouse
-	mouse_tile_x = (input->mouse_x + this->viewport->x) / (this->tile_size);
-	mouse_tile_y = (input->mouse_y + this->viewport->y) / (this->tile_size);
+	float nw = this->viewport->width * this->viewport->scale;
+	float nh = this->viewport->height * this->viewport->scale;
+	float diff_w = this->viewport->width - nw;
+	float diff_h = this->viewport->height - nh;
+
+	mouse_tile_x = (input->mouse_x + this->viewport->x - diff_w / 2) / (this->tile_size * this->viewport->scale);
+	mouse_tile_y = (input->mouse_y + this->viewport->y - diff_h / 2) / (this->tile_size * this->viewport->scale);
 }
 
 void Board::draw(Window *window) {
 	// Draw selection
-	if (board[this->mouse_tile_y][this->mouse_tile_x] != nullptr) {
-		if (board[this->mouse_tile_y][this->mouse_tile_x]->type != TANK) {
+	//if (board[this->mouse_tile_y][this->mouse_tile_x] != nullptr) {
+		//if (board[this->mouse_tile_y][this->mouse_tile_x]->type != TANK) {
 			SDL_Rect clip;
 			clip.x = 128;
 			clip.y = 0;
@@ -73,8 +78,8 @@ void Board::draw(Window *window) {
 			dst.h = tile_size;
 
 			window->draw("assets/atlas.png", clip, dst);
-		}
-	}
+		//}
+	//}
 
 	// Draw objects
 	for (int row = 0; row < 10; row++) {
