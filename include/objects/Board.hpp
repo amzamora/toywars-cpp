@@ -11,22 +11,24 @@ using namespace std;
 
 class Board {
 public:
-        // Data
-        GameObject* board[10][10];
-        Viewport *viewport;
-        unsigned int tile_size = 64;
+	// Data
+	GameObject* board[10][10];
+	GameObject* dragged_unit = nullptr;
 
-        int mouse_tile_x = -1;
-        int mouse_tile_y = -1;
+	Viewport *viewport;
+	unsigned int tile_size = 64;
 
-        // Methods
-        Board(Viewport *viewport);
-        ~Board();
+	int mouse_tile_x = -1;
+	int mouse_tile_y = -1;
 
-        void update(Input *input);
+	// Methods
+	Board(Viewport *viewport);
+	~Board();
 
-        void draw(Window *window);
-        SDL_Rect get_object_position(GameObject *object);
+	void update(Input *input);
+
+	void draw(Window *window);
+	SDL_Rect get_object_position(GameObject *object);
 };
 
 #endif

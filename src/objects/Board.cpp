@@ -59,6 +59,21 @@ void Board::update(Input *input) {
 
 	mouse_tile_x = (input->mouse_x + this->viewport->x - diff_w / 2) / (this->tile_size * this->viewport->scale);
 	mouse_tile_y = (input->mouse_y + this->viewport->y - diff_h / 2) / (this->tile_size * this->viewport->scale);
+
+	if (input->left_button_down && this->board[mouse_tile_y][mouse_tile_x] != nullptr) {
+		if (this->board[mouse_tile_y][mouse_tile_x]->type == TANK) {
+			this->dragged_unit = this->board[mouse_tile_y][mouse_tile_x];
+		}
+	}
+
+	if (this->dragged_unit != nullptr) {
+		if (!input->left_button_down) {
+			this->dragged_unit = nullptr;
+		} else {
+			this->dragged_unit->row = mouse_tile_y;
+			this->dragged_unit->column = mouse_tile_x;
+		}
+	}
 }
 
 void Board::draw(Window *window) {

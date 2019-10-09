@@ -4,8 +4,8 @@
 
 Tank::Tank(int row, int column) {
 	this->type = TANK;
-        this->row = row;
-        this->column = column;
+	this->row = row;
+	this->column = column;
 }
 
 Tank::~Tank() {
