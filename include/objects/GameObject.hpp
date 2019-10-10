@@ -9,6 +9,13 @@ enum GameObjectType {
 	WATER
 };
 
+enum Direction {
+	UP,
+	LEFT,
+	DOWN,
+	RIGHT
+};
+
 class GameObject {
 public:
 	// Data

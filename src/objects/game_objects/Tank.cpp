@@ -2,8 +2,9 @@
 
 #include "objects/game_objects/Tank.hpp"
 
-Tank::Tank() {
+Tank::Tank(enum Direction direction) {
 	this->type = TANK;
+	this->direction = direction;
 }
 
 Tank::~Tank() {

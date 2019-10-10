@@ -25,7 +25,7 @@ Board::Board(Viewport *viewport) {
 	for (int row = 0; row < 10; row++) {
 		for (int column = 0; column < 10; column++) {
 			if (board[row][column] == 1) {
-				this->board[row][column] = new Tank();
+				this->board[row][column] = new Tank(LEFT);
 
 			} else if (board[row][column] == 2) {
 				this->board[row][column] = new Water();
@@ -97,8 +97,8 @@ void Board::draw(Window *window) {
 	//if (board[this->mouse_tile_y][this->mouse_tile_x] != nullptr) {
 		//if (board[this->mouse_tile_y][this->mouse_tile_x]->type != TANK) {
 			SDL_Rect clip;
-			clip.x = 128;
-			clip.y = 0;
+			clip.x = 0;
+			clip.y = 224;
 			clip.w = 32;
 			clip.h = 32;
 
