@@ -14,9 +14,25 @@ Tank::~Tank() {
 void Tank::draw(Window *window, SDL_Rect dst) {
 	SDL_Rect clip;
 	clip.x = cx;
-	clip.y = cy;
 	clip.w = tw;
 	clip.h = th;
+
+	switch (this->direction) {
+		case RIGHT:
+			clip.y = rcy;
+			break;
+		case LEFT:
+			clip.y = lcy;
+			break;
+		case UP:
+			clip.y = tcy;
+			break;
+		case DOWN:
+			clip.y = dcy;
+			break;
+		default:
+			break;
+	}
 
 	window->draw(texture, clip, dst);
 }

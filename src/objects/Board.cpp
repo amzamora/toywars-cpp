@@ -25,7 +25,7 @@ Board::Board(Viewport *viewport) {
 	for (int row = 0; row < 10; row++) {
 		for (int column = 0; column < 10; column++) {
 			if (board[row][column] == 1) {
-				this->board[row][column] = new Tank(LEFT);
+				this->board[row][column] = new Tank(RIGHT);
 
 			} else if (board[row][column] == 2) {
 				this->board[row][column] = new Water();
@@ -73,11 +73,36 @@ void Board::update(Input *input) {
 			if (this->board[mouse_tile_y][mouse_tile_x] != this->dragged_unit) {
 				if (this->board[mouse_tile_y][mouse_tile_x] == nullptr) {
 					// Find element a removed it in board
-					for (int row = 0; row < 10; row++) {
-						for (int column = 0; column < 10; column++) {
+					int row, column;
+					for (row = 0; row < 10; row++) {
+						for (column = 0; column < 10; column++) {
 							if (board[row][column] == dragged_unit) {
 								this->board[row][column] = nullptr;
+								goto stop;
 							}
+						}
+					}
+					stop:
+
+					enum Direction movement;
+					if (row != mouse_tile_y) {
+						if (mouse_tile_y > row) {movement = DOWN;}
+						else {movement = UP;}
+					} else if (column != mouse_tile_x) {
+						if (mouse_tile_x > column) {movement = RIGHT;}
+						else {movement = LEFT;}
+					}
+
+					Tank* tank = (Tank*) this->dragged_unit;
+					if (tank->direction == RIGHT || tank->direction == LEFT) {
+						if (movement == UP || movement == DOWN) {
+							tank->direction = movement;
+						}
+					}
+
+					if (tank->direction == UP || tank->direction == DOWN) {
+						if (movement == RIGHT || movement == LEFT) {
+							tank->direction = movement;
 						}
 					}
 

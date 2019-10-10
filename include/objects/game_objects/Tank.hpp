@@ -8,7 +8,10 @@ public:
 	// Data
 	const char* texture = "assets/atlas.png";
 	const int cx = 0;  // X coordinate where to clip the texture
-	const int cy = 96;    // Y coordinate where to clip the texture
+	const int rcy = 96;    // Y coordinate where to clip the texture
+	const int lcy = 128;
+	const int tcy = 160;
+	const int dcy = 192;
 	const int tw = 32;  // Texture width
 	const int th = 32;  // Texture height
 
