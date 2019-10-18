@@ -3,6 +3,7 @@
 #include <deps/stb_image.h>
 
 #include <vector>
+#include <math.h>
 
 /* Window
    ====== */
@@ -184,6 +185,8 @@ void Window::close() {
 }
 
 void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float rotation) {
+	rotation = rotation * (3.14159265 / 180);
+
 	// If not loaded
 	// -------------
 	if (textures.find(texture_path) == textures.end()) {
@@ -196,27 +199,85 @@ void Window::draw(const char* texture_path, SDL_Rect clip, SDL_Rect dst, float r
 	// Add geometry
 	// ------------
 
+	float x, y;
+
 	// Top right
-	this->vertices.push_back(dst.x + dst.w);
-	this->vertices.push_back(dst.y);
+	x = dst.x + dst.w;
+	y = dst.y;
+
+	if (rotation > 0.01) {
+		float aux_x = x - dst.x - dst.w / 2;
+		float aux_y = y - dst.y - dst.h / 2;
+
+		x = aux_x * cos(rotation) - aux_y * sin(rotation);
+		y = aux_x * sin(rotation) + aux_y * cos(rotation);
+
+		x = x + dst.x + dst.w / 2;
+		y = y + dst.y + dst.h / 2;
+	}
+
+	this->vertices.push_back(x);
+	this->vertices.push_back(y);
 	this->vertices.push_back(clip.x / t.width + clip.w / t.width);
 	this->vertices.push_back(clip.y / t.height);
 
 	// Bottom right
-	this->vertices.push_back(dst.x + dst.w);
-	this->vertices.push_back(dst.y + dst.h);
+	x = dst.x + dst.w;
+	y = dst.y + dst.h;
+
+	if (rotation > 0.01) {
+		float aux_x = x - dst.x - dst.w / 2;
+		float aux_y = y - dst.y - dst.h / 2;
+
+		x = aux_x * cos(rotation) - aux_y * sin(rotation);
+		y = aux_x * sin(rotation) + aux_y * cos(rotation);
+
+		x = x + dst.x + dst.w / 2;
+		y = y + dst.y + dst.h / 2;
+	}
+
+	this->vertices.push_back(x);
+	this->vertices.push_back(y);
 	this->vertices.push_back(clip.x / t.width + clip.w / t.width);
 	this->vertices.push_back(clip.y / t.height + clip.h / t.height);
 
 	// Bottom left
-	this->vertices.push_back(dst.x);
-	this->vertices.push_back(dst.y + dst.h);
+	x = dst.x;
+	y = dst.y + dst.h;
+
+	if (rotation > 0.01) {
+		float aux_x = x - dst.x - dst.w / 2;
+		float aux_y = y - dst.y - dst.h / 2;
+
+		x = aux_x * cos(rotation) - aux_y * sin(rotation);
+		y = aux_x * sin(rotation) + aux_y * cos(rotation);
+
+		x = x + dst.x + dst.w / 2;
+		y = y + dst.y + dst.h / 2;
+	}
+
+	this->vertices.push_back(x);
+	this->vertices.push_back(y);
 	this->vertices.push_back(clip.x / t.width);
 	this->vertices.push_back(clip.y / t.height + clip.h / t.height);
 
 	// Top left
-	this->vertices.push_back(dst.x);
-	this->vertices.push_back(dst.y);
+	x = dst.x;
+	y = dst.y;
+
+	if (rotation > 0.01) {
+		float aux_x = x - dst.x - dst.w / 2;
+		float aux_y = y - dst.y - dst.h / 2;
+
+		x = aux_x * cos(rotation) - aux_y * sin(rotation);
+		y = aux_x * sin(rotation) + aux_y * cos(rotation);
+
+		x = x + dst.x + dst.w / 2;
+		y = y + dst.y + dst.h / 2;
+	}
+
+	this->vertices.push_back(x);
+	this->vertices.push_back(y);
 	this->vertices.push_back(clip.x / t.width);
 	this->vertices.push_back(clip.y / t.height);
 
