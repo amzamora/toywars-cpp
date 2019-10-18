@@ -3,6 +3,13 @@
 
 #include "objects/GameObject.hpp"
 
+enum Direction {
+	UP,
+	LEFT,
+	DOWN,
+	RIGHT
+};
+
 class Tank : public GameObject {
 public:
 	// Data
