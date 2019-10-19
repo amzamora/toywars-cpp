@@ -6,10 +6,16 @@
 #include "Input.hpp"
 #include "play_screen/Board.hpp"
 
+enum GameState {
+	TITLE_SCREEN,
+	PLAY_SCREEN
+};
+
 class Game {
 public:
 	// Data
 	bool running;
+	enum GameState state = PLAY_SCREEN;
 
 	// Objects
 	Window *window;
