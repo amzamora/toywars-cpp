@@ -3,7 +3,7 @@
 
 #include "SDL2/SDL.h"
 
-#include "Input.hpp"
+#include "objects/Input.hpp"
 
 class Viewport {
 public:

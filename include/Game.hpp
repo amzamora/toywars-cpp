@@ -1,21 +1,15 @@
 #ifndef Game_hpp
 #define Game_hpp
 
-#include "Window.hpp"
-#include "play_screen/Board.hpp"
-#include "Viewport.hpp"
-#include "Input.hpp"
-
-enum GameState {
-	TITLE_SCREEN,
-	PLAY_SCREEN
-};
+#include "objects/Window.hpp"
+#include "objects/Board.hpp"
+#include "objects/Viewport.hpp"
+#include "objects/Input.hpp"
 
 class Game {
 public:
 	// Data
 	bool running;
-	enum GameState state = PLAY_SCREEN;
 
 	// Objects
 	Window *window;

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Tank.hpp"
+#include "objects/game_objects/Tank.hpp"
 
 Tank::Tank(enum Direction direction) {
 	this->type = TANK;

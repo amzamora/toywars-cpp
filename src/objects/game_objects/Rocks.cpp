@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Rocks.hpp"
+#include "objects/game_objects/Rocks.hpp"
 
 Rocks::Rocks() {
 	this->type = ROCKS;

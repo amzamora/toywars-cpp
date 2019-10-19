@@ -1,7 +1,7 @@
 #ifndef WATER_HPP
 #define WATER_HPP
 
-#include "../GameObject.hpp"
+#include "objects/GameObject.hpp"
 
 class Water : public GameObject {
 public:
