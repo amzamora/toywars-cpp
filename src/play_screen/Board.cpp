@@ -1,9 +1,7 @@
-#include "objects/Board.hpp"
-
-#include "objects/Board.hpp"
-#include "objects/game_objects/Tank.hpp"
-#include "objects/game_objects/Water.hpp"
-#include "objects/game_objects/Rocks.hpp"
+#include "play_screen/Board.hpp"
+#include "play_screen/game_objects/Tank.hpp"
+#include "play_screen/game_objects/Water.hpp"
+#include "play_screen/game_objects/Rocks.hpp"
 
 Board::Board(Viewport *viewport) {
 	this->viewport = viewport;

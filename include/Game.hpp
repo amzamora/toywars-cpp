@@ -1,10 +1,10 @@
 #ifndef Game_hpp
 #define Game_hpp
 
-#include "objects/Window.hpp"
-#include "objects/Board.hpp"
-#include "objects/Viewport.hpp"
-#include "objects/Input.hpp"
+#include "Window.hpp"
+#include "Viewport.hpp"
+#include "Input.hpp"
+#include "play_screen/Board.hpp"
 
 class Game {
 public:

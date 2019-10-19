@@ -4,10 +4,10 @@
 #include <vector>
 using namespace std;
 
-#include "objects/Window.hpp"
-#include "objects/GameObject.hpp"
-#include "objects/Viewport.hpp"
-#include "objects/Input.hpp"
+#include "Window.hpp"
+#include "Input.hpp"
+#include "Viewport.hpp"
+#include "play_screen/GameObject.hpp"
 
 class Board {
 public:

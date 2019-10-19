@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "objects/game_objects/Water.hpp"
+#include "play_screen/game_objects/Water.hpp"
 
 Water::Water() {
 	this->type = WATER;
