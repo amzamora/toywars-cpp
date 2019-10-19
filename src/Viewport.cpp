@@ -1,4 +1,4 @@
-#include "objects/Viewport.hpp"
+#include "Viewport.hpp"
 
 Viewport::Viewport(int x, int y, unsigned int width, unsigned int height) {
 	this->x = x;

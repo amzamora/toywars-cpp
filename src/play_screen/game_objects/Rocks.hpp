@@ -1,7 +1,7 @@
 #ifndef ROCKS_HPP
 #define ROCKS_HPP
 
-#include "objects/GameObject.hpp"
+#include "../GameObject.hpp"
 
 class Rocks : public GameObject {
 public:

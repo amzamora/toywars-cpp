@@ -1,7 +1,7 @@
 #ifndef TANK_HPP
 #define TANK_HPP
 
-#include "objects/GameObject.hpp"
+#include "../GameObject.hpp"
 
 enum Direction {
 	UP,

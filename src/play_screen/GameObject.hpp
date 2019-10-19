@@ -1,7 +1,7 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
 
-#include "objects/Window.hpp"
+#include "../Window.hpp"
 
 enum GameObjectType {
 	TANK,

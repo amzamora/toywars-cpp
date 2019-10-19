@@ -96,21 +96,39 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-	board->update(input);
-	input->scroll = 0;
+	switch (this->state) {
+	case TITLE_SCREEN:
+		
+	break;
+	case PLAY_SCREEN:
+		board->update(input);
+		input->scroll = 0;
+	break;
+	}
 }
 
 void Game::render() {
-	// Clear display
-	window->clear();
+	switch (this->state) {
+	case TITLE_SCREEN:
+		// Clear display
+		window->clear();
 
-	// Draw board
-	board->draw(window);
 
-	//Update screen
-	window->viewport = board->viewport;
-	window->update();
-	window->viewport = nullptr;
+	break;
+
+	case PLAY_SCREEN:
+		// Clear display
+		window->clear();
+
+		// Draw board
+		board->draw(window);
+
+		//Update screen
+		window->viewport = board->viewport;
+		window->update();
+		window->viewport = nullptr;
+	break;
+	}
 }
 
 void Game::close() {
