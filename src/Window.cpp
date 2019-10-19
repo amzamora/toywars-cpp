@@ -1,6 +1,6 @@
 #include "Window.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include <deps/stb_image.h>
 
 #include <vector>
 #include <math.h>
